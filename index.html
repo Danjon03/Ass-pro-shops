@@ -1,60 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<!-- 
+
+python -m http.server 8080
+http://localhost:8080/index.html
+
+
+make buttons work 
+
+-->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu Page</title>
 
     <style>
+        html,
         body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
+            height: 100%;
             margin: 0;
-            padding: 0;
-            height: 100vh;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
         }
+
         .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             background-color: #222e86;
             color: white;
-            text-align: center;
-            padding: 10px;
-            width: 100%;
+            height: 70px;
+            padding: 0 10px;
             position: fixed;
             top: 0;
             left: 0;
-            z-index: 10;
+            width: 100%;
+            z-index: 1000;
         }
-        .menu-content {
+
+        .top-bar-section {
+            flex: 1;
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 80px 20px 20px;
-            gap: 20px;
+            align-items: center;
+            justify-content: center;
         }
-        .assets, .metrics {
+
+        .top-bar-section.left {
+            justify-content: flex-start;
+        }
+
+        .top-bar-section.right {
+            justify-content: flex-end;
+        }
+
+        .top-title {
+            font-size: 22px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .logout-btn {
+            background-color: #9e1e1e;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 20px;
+        }
+
+        .content {
+            position: fixed;
+            top: 70px;
+            /* matches height of top-bar */
+            left: 0;
+            width: 100%;
+            height: calc(100% - 70px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            /* removes scrolling */
+        }
+
+
+        .button-container {
             display: flex;
             flex-direction: column;
-            width: 45%;
-            gap: 15px;
+            gap: 18px;
+            align-items: center;
         }
-        .assets h2, .metrics h2 {
-            text-align: center;
-            margin-bottom: 15px;
-            font-size: 20px;
-            color: black;
-        }
-        button {
+
+        .menu-btn {
+            width: 250px;
             padding: 15px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
+            font-size: 18px;
             background-color: #222e86;
             color: white;
-            width: 100%;
+            border: none;
+            cursor: pointer;
         }
-        button:hover {
+
+        .menu-btn:hover {
             background-color: #3e50d3;
         }
     </style>
@@ -62,27 +111,23 @@
 
 <body>
     <div class="top-bar">
-        <p style="display: inline-block; margin-right: 20px;">Welcome to Asset Pro!</p>
-        <div style="display: inline-flex; gap: 10px; align-items: center; font-size: 14px;">
-            <button style="font-size: 12px; padding: 8px 12px;" onclick="navigateTo('admin/userProfile')">User Profile</button>
-            <button style="font-size: 12px; padding: 8px 12px;" onclick="navigateTo('admin/listUsers')">Admin Permissions</button>
-            <button style="font-size: 12px; padding: 8px 12px;" onclick="navigateTo('settings')">Settings</button>
+        <div class="top-bar-section left"></div>
+
+        <div class="top-bar-section center">
+            <p class="top-title">Welcome <span id="username">[User]!</span></p>
+        </div>
+
+        <div class="top-bar-section right">
+            <button class="logout-btn">Log Out</button>
         </div>
     </div>
 
-    <div class="menu-content">
-        <div class = "assets">
-            <h2>Assets</h2>
-            <button onclick="navigateTo('assets/createAsset')">Create Asset</button>
-             <button onclick="navigateTo('assets/fillAsset')">Fill Out Assets</button>
-            <button onclick="navigateTo('assets/viewAssets')">Asset History</button>
-        </div>
-
-        <div class = "metrics">
-            <h2>Metrics</h2>
-            <button onclick="navigateTo('metrics/createMetric')">Create Metric</button>
-            <button onclick="navigateTo('metrics/fillMetric')">Fill Out Metrics</button>
-            <button onclick="navigateTo('metrics/viewMetrics')">Metric History</button>
+    <div class="content">
+        <div class="button-container">
+            <button class="menu-btn" onclick="navigateTo('assets')">Assets</button>
+            <button class="menu-btn" onclick="navigateTo('metrics')">Metrics</button>
+            <button class="menu-btn" onclick="navigateTo('history')">History</button>
+            <button class="menu-btn" onclick="navigateTo('users')">Users</button>
         </div>
     </div>
 
