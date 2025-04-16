@@ -107,7 +107,7 @@ function postUser(query)
 
   // Get method example to get ALL Records from a specific table
   async function getUsers() {
-    const url = 'http://174.46.15.138/api/getUsers';
+    const url = 'http://localhost:3000/api/getUsers';
     const customHeaders = {
         "Content-Type": "application/json",
     };
