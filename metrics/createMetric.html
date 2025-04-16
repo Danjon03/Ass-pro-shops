@@ -1,188 +1,99 @@
-<!DOCTYPE html>
-<html>
-<!-- NEEDS TO BE FIXED -->
+<!-- 
+fix styling - i want it to be centered
 
 
-<script>
-
-document.addEventListener("DOMContentLoaded", function() {
-    const titleInput = document.getElementById("template-title");
-    const addNewFieldButton = document.getElementById("newField-btn");
-    const fieldsContainer = document.getElementById("field-container");
-    const clearFieldsButton = document.getElementById("clearFields-btn");
-    const saveTemplateButton = document.getElementById("saveTemplate-btn");
-    const outputDisplay = document.getElementById("output");
-    const clearSavedButton = document.getElementById("clearSaved-btn");
-    
-
-    // loading existing forms from local storage (if any)
-    let templateTitles = JSON.parse(localStorage.getItem("templateTitles")) || [];
-
-    // function to update output
-    function updateOutput() {
-        outputDisplay.textContent = JSON.stringify(templateTitles, null, 2); // array formatting
-    }
-
-    // displaying existing data (for testing)
-    updateOutput();
-
-    // function for adding new input field dynamically
-    addNewFieldButton.addEventListener("click", function() {
-        const newField = document.createElement("input");
-        newField.type = "text";
-        newField.classList.add("form-field");
-        fieldsContainer.appendChild(newField);
-    })
-
-    // function for deleting all fields
-    clearFieldsButton.addEventListener("click", function(){
-        fieldsContainer.innerHTML = "";
-    })
-
-    // function for saving form
-    saveTemplateButton.addEventListener("click", function() {
-        const title = titleInput.value.trim();
-        const fieldValues = Array.from(fieldsContainer.querySelectorAll(".form-field"))
-                            .map(field => field.value.trim())
-                            .filter(value => value !== ""); // removes empty fields
-
-        if (title || fieldValues.length > 0) { // checking if there are values in the array
-            templateTitles.push({title, fields: fieldValues}); // storing the data as an object
-            localStorage.setItem("templateTitles", JSON.stringify(templateTitles)); // save to local storage
-            updateOutput(); // update display
-            titleInput.value = ""; // clear title
-            fieldValues.innerHTML = ""; // clearing fields
-        }
-    });
-
-
-    // function for clearing storage
-    clearSavedButton.addEventListener("click", function() {
-        localStorage.removeItem("templateTitles"); // removing titles from storage
-        templateTitles = []; // resetting array
-        updateOutput(); // updating display
-    });
-    
-});
-
-
-
-</script>
-
-
+-->
 
 <style>
-    body {
-    font-family: Arial, sans-serif;
-    /* display: flex;
-    flex-direction: column; */
-    /* align-items: center; */
-    /* margin: 20; */
-    background-color: #0d25dc;
-}
+    .template-container {
+        background: white;
+        padding: 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
 
-.form-container {
-    width: 80%;
-    max-width: 600px;
-    background: white;
-    padding: 10px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-}
+    #asset,
+    #title {
+        width: 50%;
+        padding: 5px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        /* Matches a standard input border */
+        box-sizing: border-box;
+        margin-top: 5px;
+        margin-bottom: 15px;
+    }
 
-#template-title {
-    width: 100%;
-    font-size: 24px;
-    border: none;
-    outline: none;
-    border-bottom: 2px solid #ccc;
-}
+    .title-container input {
+        flex: 1;
+        padding: 5px;
+        margin-right: 10px;
+    }
 
-#template-title:focus {
-    border-bottom: 2px solid #007bff;
-}
+    .new-field {
+        display: block;
+        margin: 10px;
+        width: 50%;
+    }
 
-#newField-btn {
-    margin-top: 10px;
-    cursor: pointer;
-}
+    .new-field input {
+        flex: 1;
+        padding: 5px;
+        margin-right: 10px;
+        width: 50%;
+    }
 
-#newField-btn:hover {
-    background-color: #bebcbcd1;
-}
+    .delete-button {
+        background: rgb(214, 24, 24);
+        color: white;
+        border: none;
+        font-size: 12px;
+        cursor: pointer;
+    }
 
-#clearFields-btn {
-    margin: 10px;
-    cursor: pointer;
-}
+    .delete-button:hover {
+        background: rgb(137, 15, 15);
+    }
 
-#clearFields-btn:hover {
-    background-color: #bebcbcd1;
-}
+    #newField-btn,
+    #clearFields-btn,
+    #saveTemplate-btn {
+        margin-top: 10px;
+        margin-right: 10px;
+        padding: 8px 12px;
+        background-color: #3e50d3;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
 
-#saveTemplate-btn {
-    margin-top: 8px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-#saveTemplate-btn:hover {
-    background-color: #0056b3;
-}
-
-.output-container {
-    width: 80%;
-    max-width: 600px;
-    background: white;
-    padding: 10px;
-}
-
-#clearSaved-btn {
-    margin-top: 5px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-#clearSaved-btn:hover {
-    background-color: #0056b3;
-}
-
-pre {
-    background: #f4f4f4;
-    padding: 10px;
-}
-
+    #newField-btn:hover,
+    #clearFields-btn:hover,
+    #saveTemplate-btn:hover {
+        background-color: #222e86;
+    }
 </style>
 
+<div class="template-container">
+    <label for="asset">Choose a pre-existing asset:</label>
+    <select id="asset">
+        <!-- hard coded values. eventually needs to be fixed so it is dynamic -->
+         <option value = "">Select asset</option>
+        <option value="car">Car</option>
+        <option value="device">Device</option>
+        <option value="employee">Employee</option>
+    </select>
 
-<head>
-    <title>Custom Form</title>
-    <link rel="stylesheet" href="templateStyle.css">
-</head>
-<body>
-    <!-- container for the form -->
-    <div class="form-container">
-        <input type="text" id="template-title" placeholder="Enter template title here">
-        <button id="newField-btn">Add New Field</button>
-        <button id = "clearFields-btn">Clear Fields</button>
-
-        <div id="field-container"></div>
-
-        <button id="saveTemplate-btn">Save Template</button>
+    <div class="title-container">
+        <label for="title">Template Title:</label>
+        <input type="text" id="title" class="template-container" placeholder="Enter title here">
     </div>
 
-    <!-- container for the output -->
-    <div class="output-container">
-        <h3>Saved Forms:</h3>
-        <pre id="output"></pre>
-        <button id="clearSaved-btn">Clear Saved Forms</button>
-    </div>
+    <button id="newField-btn">Add New Field</button>
+    <button id="clearFields-btn">Clear All Fields</button>
 
+    <div id="field-container"></div> <!-- container for the dynamic fields -->
 
-    <script src="template.js"></script>
-</body>
-</html>
+    <button id="saveTemplate-btn">Save Template</button>
+</div>
