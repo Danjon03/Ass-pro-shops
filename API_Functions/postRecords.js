@@ -221,30 +221,49 @@ async function updateUserPermissions(id, permissions) {
     }
 }
 
+
+async function updateTemplate(id, newTemplate) {
+    console.log("In update template");
+    const url = 'http://localhost:3000/api/updateTemplate';
+    const data = {
+        "oldId": id,
+        "newTemplate": newTemplate
+    };
+
+    const customHeaders = {
+        "Content-Type": "application/json",
+    };
+
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: customHeaders,
+            body: JSON.stringify(data),
+        });
+        const responseData = await response.json(); // Wait for the response data
+        return responseData;
+    } catch (error) {
+        console.error("Error logging in:", error);
+        return -1; // Return -1 in case of an error
+    }
+}
+
 async function a(){
-console.log(await getRecords());
+console.log(await getTemplates());
 //console.log(await getUserByID(1));
 };
 
-//Uncomment these lines to test them
-// deleteUsers();
-// console.log(loginUser("danjon03", "Password"));
 
-//postUser(query);
-
-//deleteUsers();
-//postUser(query);
-let x = {
-    Brand: "Dell",
-    MobileorLaptop: "Laptop",
-    OS: "Windows",
-    template: "Device",
-    timestamp: "4/15/2025, 7:15:35 PM",
-    userId: 0
+const id = '67feef678f74a9bb8b6ae88f';
+let x = 
+    {
+        title: 'Device',
+        timestamp: '4/18/2025, 4:29:39 PM',
+        userId: 0,
+        fieldValues: [ 'Brand', 'Mobile/Laptop', 'OS' ]
   };
-//postRecords(x)
-//postTemplate(x);
+
+//updateTemplate(id, x);
 a();
 
-//getRecords();
-//postRecords("Fake Data");
+
