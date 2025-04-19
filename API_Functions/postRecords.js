@@ -249,8 +249,7 @@ async function updateTemplate(id, newTemplate) {
 }
 
 async function a(){
-console.log(await getTemplates());
-//console.log(await getUserByID(1));
+    console.log(await getTemplates());
 };
 
 
