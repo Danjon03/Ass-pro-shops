@@ -248,8 +248,34 @@ async function updateTemplate(id, newTemplate) {
     }
 }
 
+async function getRecordsbyTitle(title)
+{
+    const url = 'http://localhost:3000/api/getRecordsByTitle';
+    const data = {
+        "title": title
+    };
+
+    const customHeaders = {
+        "Content-Type": "application/json",
+    };
+
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: customHeaders,
+            body: JSON.stringify(data),
+        });
+        const responseData = await response.json(); // Wait for the response data
+        return responseData;
+    } catch (error) {
+        console.error("Error logging in:", error);
+        return -1; // Return -1 in case of an error
+    }
+}
+
+
 async function a(){
-    console.log(await getTemplates());
+    console.log(await getRecordsbyTitle("Template"));
 };
 
 
