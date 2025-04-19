@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="../API_Functions/postRecords.js"></script>
+
+  <meta charset="UTF-8">
+  <title>Template Selector</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+    }
+    label, select, button {
+      display: block;
+      margin: 15px 0;
+    }
+    #actionButtons {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h2>Select a Template</h2>
+
+  <label for="templateSelector">Choose Template:</label>
+  <select id="templateSelector">
+    <option value="">-- Select a Template --</option>
+  </select>
+
+  <div id="actionButtons">
+    <button id="downloadBtn">Download All Records</button>
+    <button id="viewRecordBtn">Select a Specific Record</button>
+  </div>
+
+  <script>
+
+
+    async function getAllTemplates()
+    {
+        return await getTemplates();
+    }
+
+    const templates = getAllTemplates();
+
+    const templateSelector = document.getElementById('templateSelector');
+    const actionButtons = document.getElementById('actionButtons');
+
+    // Populate dropdown
+    templates.forEach(template => {
+      const option = document.createElement('option');
+      option.value = template._id;
+      option.textContent = template.title;
+      templateSelector.appendChild(option);
+    });
+
+    // Show buttons on selection
+    templateSelector.addEventListener('change', () => {
+      actionButtons.style.display = templateSelector.value ? 'block' : 'none';
+    });
+
+    // Handlers for buttons (logic to be added)
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+      alert(`Download all records for template ID: ${templateSelector.value}`);
+      // Implement actual download logic here
+    });
+
+    document.getElementById('viewRecordBtn').addEventListener('click', () => {
+      alert(`Select a record for template ID: ${templateSelector.value}`);
+      // Implement record selection logic here
+    });
+  </script>
+</body>
+</html>
