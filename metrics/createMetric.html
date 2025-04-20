@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script src="../API_Functions/postRecords.js"></script>
+  <script src="../API_Functions/metrics.js"></script>
   <title>Create Metric</title>
   <style>
     body {
@@ -78,13 +80,13 @@
 </head>
 <body>
   <div class="template-container">
-    <label for="templateTitle">Choose a pre‑existing template:</label>
+    <label for="templateTitle">Choose an Asset:</label>
     <select id="templateTitle">
-      <option value="">Select a template</option>
+      <option value="">Select an Asset</option>
     </select>
 
     <div class="title-container">
-      <label for="title">Template Title:</label>
+      <label for="title">Metric Title:</label>
       <input type="text" id="title" placeholder="Enter title here">
     </div>
 
@@ -99,14 +101,18 @@
   </div>
 
   <script>
-    const templatesData = [
-      { _id: '67feee528f74a9bb8b6ae88e', title: 'Daniel', timestamp: '4/15/2025, 6:40:02 PM', userId: 0, fieldValues: ['Daniel','Daniel'] },
-      { _id: '67ffe9a3381cdfe1fa0d82a4', title: 'Daniel', timestamp: '4/16/2025, 12:32:19 PM', userId: 0, fieldValues: ['Daniel','Daniel'] },
-      { _id: '6802c5a2b4dafc0602b09294', title: 'Device',  timestamp: '4/18/2025, 4:29:39 PM', userId: 0, fieldValues: ['Brand','Mobile/Laptop','OS'] },
-      { _id: '6802c5a2b4dafc0602b09295', title: 'Template',timestamp: '4/18/2025, 5:40:22 PM', userId: 0, fieldValues: ['Hello','World'] }
-    ];
+    
+    async function initializeEverything()
+    {
+      const x = await getTemplates();
+      populateTemplateDropdown(x);
+      initializeCreateMetric();
+    }
 
-    function populateTemplateDropdown() {
+    
+
+
+    function populateTemplateDropdown(templatesData) {
       const dropdown = document.getElementById('templateTitle');
       templatesData.forEach(t => {
         const opt = document.createElement('option');
@@ -177,7 +183,12 @@
           fieldValues: fieldValues
         };
 
+        //Send metricObj to server
+        addMetricTemplate(metricObj);
+
+
         console.log("Created metric object:", metricObj);
+
 
         // clear form
         fieldsContainer.innerHTML = "";
@@ -188,8 +199,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      populateTemplateDropdown();
-      initializeCreateMetric();
+      initializeEverything();
     });
   </script>
 </body>

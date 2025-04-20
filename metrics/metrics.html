@@ -140,7 +140,7 @@ http://localhost:8080/metrics.html
     <!-- top bar section -->
     <div class="top-bar">
         <div class="top-bar-section left">
-            <button class="back-btn" onclick="navigateTo('../index')">← Back to Main Menu</button>
+            <button class="back-btn" onclick="back()">← Back to Main Menu</button>
         </div>
 
         <div class="top-bar-section center">
@@ -177,6 +177,11 @@ http://localhost:8080/metrics.html
         function editMetric()
         {
             window.location.href = "editMetric.html";
+        }
+
+        function back()
+        {
+            window.location.href = "../index.html"
         }
 
 
