@@ -97,7 +97,6 @@ function postUser(query)
             headers: customHeaders
         });
         const data = await response.json();
-        console.log(data); // You can still log it for debugging
         return data; // Return the fetched data
     } catch (error) {
         console.error('Error:', error);
@@ -275,7 +274,7 @@ async function getRecordsbyTitle(title)
 
 
 async function a(){
-    console.log(await getRecordsbyTitle("Template"));
+    console.log(await deleteUsers());
 };
 
 
