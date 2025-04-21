@@ -1,4 +1,10 @@
+<!-- 
+fix styling - i want it to be centered
+the add new field needs to have a gap in between the button
+remove hard coded assers and make it dynamic
 
+
+-->
 
 <style>
   /* reuse styles from createMetric */
@@ -45,7 +51,6 @@
   }
 
   #newField-btn,
-  #clearFields-btn,
   #saveTemplate-btn {
     margin-top: 10px;
     margin-right: 10px;
@@ -57,7 +62,6 @@
   }
 
   #newField-btn:hover,
-  #clearFields-btn:hover,
   #saveTemplate-btn:hover {
     background-color: #222e86;
   }
@@ -96,7 +100,6 @@
   </div>
 
   <button id="newField-btn">Add New Field</button>
-  <button id="clearFields-btn">Clear All Fields</button>
 
   <div id="field-container"></div> <!-- container for the dynamic fields -->
 
