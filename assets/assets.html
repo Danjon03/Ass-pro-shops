@@ -3,13 +3,13 @@
 
 <!-- 
 python -m http.server 8080
-http://localhost:8080/metrics.html
+http://localhost:8080/assets.html
 -->
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Metric Menu</title>
+    <title>Asset Menu</title>
     <style>
         html,
         body {
@@ -74,7 +74,7 @@ http://localhost:8080/metrics.html
             margin-right: 20px;
         }
 
-        .metric-button-row {
+        .asset-button-row {
             position: fixed;
             top: 70px;
             /* directly under top bar (which is 70px high) */
@@ -90,7 +90,7 @@ http://localhost:8080/metrics.html
             border-bottom: 1px solid #b5b5b5;
         }
 
-        .metric-btn {
+        .asset-btn {
             padding: 10px 20px;
             font-size: 16px;
             background-color: #3e50d3;
@@ -99,7 +99,7 @@ http://localhost:8080/metrics.html
             cursor: pointer;
         }
 
-        .metric-btn:hover {
+        .asset-btn:hover {
             background-color: #222e86;
         }
 
@@ -144,7 +144,7 @@ http://localhost:8080/metrics.html
         </div>
 
         <div class="top-bar-section center">
-            <button class="top-title reset-btn" onclick="resetView()">Metric Menu</button>
+            <button class="top-title reset-btn" onclick="resetView()">Asset Menu</button>
         </div>
 
         <div class="top-bar-section right">
@@ -153,14 +153,16 @@ http://localhost:8080/metrics.html
     </div>
 
     <!-- button row section -->
-    <div class="metric-button-row">
-        <button class="metric-btn" onclick="loadView('createMetric')">Create</button>
-        <button class="metric-btn" onclick="loadView('editMetric')">Edit</button>
-        <button class="metric-btn" onclick="loadView('fillMetrics')">Fill</button>
+    <div class="asset-button-row">
+        <button class="asset-btn" onclick="loadView('registerAsset')">Register</button>
+        <button class="asset-btn" onclick="loadView('editAsset')">Edit</button>
+        <button class="asset-btn" onclick="loadView('fillAsset')">Fill</button>
     </div>
 
     <!-- dynamic view container -->
     <div id="view-container"></div>
+
+    <script src="../API_Functions/postRecords.js"></script>
 
     <script>
         function navigateTo(page) {
@@ -176,12 +178,12 @@ http://localhost:8080/metrics.html
                     // Dynamically load script based on view name
                     let scriptName = "";
 
-                    if (viewName === "createMetric") {
-                        scriptName = "createMetric.js";
-                    } else if (viewName === "editMetric") {
-                        scriptName = "editMetric.js";
-                    } else if (viewName === "fillMetrics") {
-                        scriptName = "fillMetrics.js";
+                    if (viewName === "registerAsset") {
+                        scriptName = "registerAsset.js";
+                    } else if (viewName === "editAsset") {
+                        scriptName = "editAsset.js";
+                    } else if (viewName === "fillAssets") {
+                        scriptName = "fillAssets.js";
                     }
 
                     if (scriptName) {
@@ -206,7 +208,7 @@ http://localhost:8080/metrics.html
         }
 
         function resetView() {
-            loadView('metricPlaceholder');
+            loadView('assetPlaceholder');
         }
 
         // Load welcome view on page load

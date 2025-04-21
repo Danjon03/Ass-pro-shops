@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- 
+
+python -m http.server 8080
+http://localhost:8080/index.html
+
+
+make buttons work 
+add text to the top in between the buttons (instructions on how to use the program)
+
+-->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -115,7 +126,7 @@
     <div class="content">
         <div class="button-container">
             <button class="menu-btn" onclick="navigateTo('assets')">Assets</button>
-            <button class="menu-btn" onclick="navigateTo('metrics/metrics.html')">Metrics</button>
+            <button class="menu-btn" onclick="navigateTo('metrics')">Metrics</button>
             <button class="menu-btn" onclick="navigateTo('history')">History</button>
             <button class="menu-btn" onclick="navigateTo('users')">Users</button>
         </div>
@@ -123,7 +134,7 @@
 
     <script>
         function navigateTo(page) {
-            window.location.href = page;
+            window.location.href = "/" + page + "/" + page + ".html";
         }
     </script>
 </body>

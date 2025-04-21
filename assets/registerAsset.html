@@ -1,7 +1,6 @@
 <!-- 
 fix styling - i want it to be centered
-i want the select asset text to be grayed out the same way the template title is
-remove hard coded assers and make it dynamic
+enter asset name is too small 
 
 
 -->
@@ -15,7 +14,6 @@ remove hard coded assers and make it dynamic
         border: 1px solid rgba(0, 0, 0, 0.1);
     }
 
-    #asset,
     #title {
         width: 50%;
         padding: 5px;
@@ -78,18 +76,9 @@ remove hard coded assers and make it dynamic
 </style>
 
 <div class="template-container">
-    <label for="asset">Choose a pre-existing asset:</label>
-    <select id="asset">
-        <!-- hard coded values. eventually needs to be fixed so it is dynamic -->
-         <option value = "">Select asset</option>
-        <option value="car">Car</option>
-        <option value="device">Device</option>
-        <option value="employee">Employee</option>
-    </select>
-
     <div class="title-container">
-        <label for="title">Template Title:</label>
-        <input type="text" id="title" class="template-container" placeholder="Enter title here">
+        <label for="title">Asset:</label>
+        <input type="text" id="template-title" class="template-container" placeholder="Enter asset name here">
     </div>
 
     <button id="newField-btn">Add New Field</button>

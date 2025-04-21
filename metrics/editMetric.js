@@ -7,7 +7,6 @@ function initializeEditMetric() {
   const templateDropdown = document.getElementById("templateTitle");
   const addNewFieldButton = document.getElementById("newField-btn");
   const fieldsContainer = document.getElementById("field-container");
-  const clearFieldsButton = document.getElementById("clearFields-btn");
   const saveTemplateButton = document.getElementById("saveTemplate-btn");
   const deleteTemplateButton = document.getElementById("deleteTemplate-btn");
 
@@ -35,10 +34,6 @@ function initializeEditMetric() {
     fieldsContainer.appendChild(fieldWrapper);
   });
 
-  clearFieldsButton.addEventListener("click", function () {
-    fieldsContainer.innerHTML = "";
-
-  });
 
   saveTemplateButton.addEventListener("click", function () {
     try {

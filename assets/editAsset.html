@@ -1,89 +1,99 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Template Selector</title>
-  <script src="../API_Functions/postRecords.js"></script>
+<!-- 
+fix styling - i want it to be centered
+the add new field needs to have a gap in between the button
 
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 30px;
-      background-color: #0d25dc;
+this is generating a drop down based off the metrics templates and it needs to generate it based off assets templates
+doesnt auto refresh
+
+-->
+
+<style>
+    /* reuse styles from createMetric */
+    .template-container {
+      background: white;
+      padding: 20px;
+      max-width: 600px;
+      margin-top: 20px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  
+    .title-container select {
+      width: 100%;
+      padding: 5px;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+  
+    .new-field {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+  
+    .new-field input {
+      flex: 1;
+      padding: 5px;
+      margin-right: 10px;
+    }
+  
+    .delete-button {
+      background: rgb(214, 24, 24);
       color: white;
-    }
-    label, select, button {
-      display: block;
-      margin: 15px 0;
-      padding: 8px;
-    }
-    button {
-      max-width: 220px;
-      font-weight: bold;
-      background-color: #007bff;
       border: none;
-      color: white;
+      font-size: 12px;
       cursor: pointer;
-      border-radius: 4px;
+      padding: 5px 10px;
     }
-    button:hover {
-      background-color: #0056b3;
+  
+    .delete-button:hover {
+      background: rgb(137, 15, 15);
     }
-    #actionButtons {
-      display: none;
+  
+    #newField-btn,
+    #saveTemplate-btn {
+      margin-top: 10px;
+      margin-right: 10px;
+      padding: 8px 12px;
+      background-color: #3e50d3;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  
+    #newField-btn:hover,
+    #saveTemplate-btn:hover {
+      background-color: #222e86;
+    }
+  
+    #deleteTemplate-btn {
+      margin-top: 10px;
+      margin-right: 10px;
+      padding: 8px 12px;
+      background-color: rgb(214, 24, 24);
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  
+    #deleteTemplate-btn:hover {
+      background-color: rgb(137, 15, 15);
     }
   </style>
-</head>
-<body>
-  <h2>Select a Template</h2>
-
-  <label for="templateSelector">Choose Template:</label>
-  <select id="templateSelector">
-    <option value="">-- Select a Template --</option>
-  </select>
-
-  <div id="actionButtons">
-    <button id="downloadBtn">Download All Records</button>
-    <button id="viewRecordBtn">Select a Specific Record</button>
+  
+  <div class="template-container">
+    <div class="title-container">
+      <label for="templateTitle">Choose a pre-existing template:</label>
+      <select id="templateTitle">
+        <option value="">Select a template</option>
+        <!-- Options will be added dynamically -->
+      </select>
+    </div>
+  
+    <button id="newField-btn">Add New Field</button>
+  
+    <div id="field-container"></div> <!-- container for the dynamic fields -->
+  
+    <button id="saveTemplate-btn">Save Template</button>
+    <button id="deleteTemplate-btn">Delete Template</button>
+    
   </div>
-
-  <script>
-    let templates = {};
-
-    async function loadTemplates() {
-      const rawTemplates = await getTemplates();
-      templates = {};
-      rawTemplates.forEach(template => templates[template._id] = template);
-
-      const selector = document.getElementById("templateSelector");
-      rawTemplates.forEach(template => {
-        const option = document.createElement("option");
-        option.value = template._id;
-        option.textContent = template.title;
-        selector.appendChild(option);
-      });
-    }
-
-    window.onload = async () => {
-      await loadTemplates();
-
-      const selector = document.getElementById("templateSelector");
-      const actionButtons = document.getElementById("actionButtons");
-
-      selector.addEventListener("change", () => {
-        actionButtons.style.display = selector.value ? "block" : "none";
-      });
-
-      document.getElementById('downloadBtn').onclick = () => {
-        alert(`Download all records for template: ${templates[selector.value].title}`);
-        // Implement actual download logic here
-      };
-
-      document.getElementById('viewRecordBtn').onclick = () => {
-        alert(`View records for template: ${templates[selector.value].title}`);
-        // Implement actual view logic here
-      };
-    };
-  </script>
-</body>
-</html>
