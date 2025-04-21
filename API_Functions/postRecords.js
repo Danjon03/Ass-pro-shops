@@ -62,7 +62,6 @@ function postRecords(query)
 
 }
 
-
   // Post Function for Post User
 function postUser(query)
 {
@@ -276,20 +275,30 @@ async function getRecordsbyTitle(title)
 
 
 async function a(){
-    console.log(await getRecordsbyTitle("Template"));
+    console.log(await getUsers());
 };
 
 
-const id = '67feef678f74a9bb8b6ae88f';
+
 let x = 
     {
-        title: 'Device',
-        timestamp: '4/18/2025, 4:29:39 PM',
-        userId: 0,
-        fieldValues: [ 'Brand', 'Mobile/Laptop', 'OS' ]
+        
+            id: 0,
+            name: 'Miranda',
+            username: 'Miranda',
+            password: 'Miranda',
+            permissions: {
+              canEditUserInfo: true,
+              canCreateAssets: true,
+              canCreateMetric: true,
+              canFillMetric: true,
+              canFillAsset: true,
+              canViewRecords: true
+            }
+          
   };
 
 //updateTemplate(id, x);
-//a();
-
+a();
+//postUser(x);
 
