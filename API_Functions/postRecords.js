@@ -276,7 +276,7 @@ async function getRecordsbyTitle(title)
 
 
 async function a(){
-    console.log(await deleteUsers());
+    console.log(await getRecordsbyTitle("Template"));
 };
 
 
